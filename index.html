@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" />
+    <meta name="description" content="Smart mattress and electric bed interface prototype" />
+    <title>Smart Sleep Bed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content" data-i18n="app.skip">Skip to main content</a>
+    <div class="app-shell">
+      <aside class="sidebar" data-i18n-aria="app.primaryNav">
+        <a class="brand" href="#home" data-i18n-aria="app.brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none"><path d="M7 27V15m0 9h26v-8a4 4 0 0 0-4-4h-6a4 4 0 0 0-4 4v8m-12 4v-4m26 4v-4M12 16h7" stroke="currentColor" stroke-width="var(--component-border-emphasis)" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 30h26" stroke="currentColor" stroke-width="var(--component-border-emphasis)" stroke-linecap="round"/></svg>
+          </span>
+          <span class="brand-copy"><strong data-i18n="app.brand">Sleep system</strong><small data-i18n="app.brandPending">Prototype · name pending</small></span>
+        </a>
+
+        <div class="nav-label" data-i18n="app.menu">Menu</div>
+        <nav class="primary-nav" id="primary-nav" data-i18n-aria="app.primaryNav">
+          <a class="nav-link is-active" href="#home" data-page="home" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span data-i18n="nav.home">Overview</span>
+          </a>
+          <a class="nav-link" href="#control" data-page="control">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16M8 5v6m8 0V5m-8 8v6m8-6v6"/></svg><span data-i18n="nav.control">Bed control</span>
+          </a>
+          <a class="nav-link" href="#report" data-page="report">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6.5 16V9m5 7V4.5m5 11.5v-5"/><path d="m5.5 6.5 5.8-3 5.2 4.2 2.8-1.5"/></svg><span data-i18n="nav.report">Sleep report</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="device-card">
+            <span class="device-indicator" aria-hidden="true"></span>
+            <div><strong id="sidebar-device-title">Electric bed</strong><small id="sidebar-device-note">Demo mode</small></div>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+          <a class="nav-link profile-link" href="#profile" data-page="profile">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.7-3.2 3.1-5 7-5s6.3 1.8 7 5"/></svg><span data-i18n="nav.profile">Account &amp; settings</span>
+          </a>
+          <div class="sidebar-foot" data-i18n="app.sampleOnly">Sample data only</div>
+        </div>
+      </aside>
+
+      <div class="main-column">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M7 27V15m0 9h26v-8a4 4 0 0 0-4-4h-6a4 4 0 0 0-4 4v8m-12 4v-4m26 4v-4M12 16h7" stroke="currentColor" stroke-width="var(--component-border-emphasis)" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 30h26" stroke="currentColor" stroke-width="var(--component-border-emphasis)" stroke-linecap="round"/></svg></span>
+            <strong data-i18n="app.brand">Sleep system</strong>
+          </div>
+          <div class="topbar-context"><span class="status-dot" aria-hidden="true"></span><span data-i18n="app.mainBedroom">Main bedroom</span><span class="topbar-divider" aria-hidden="true"></span><span class="topbar-sample" data-i18n="app.sampleData">Sample data</span></div>
+          <select id="language-select" class="language-select" aria-label="Language" data-i18n-aria="language.label">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+          </select>
+          <button class="avatar-button" type="button" data-page="profile" data-i18n-aria="app.goProfile"><span>A</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></button>
+        </header>
+        <main id="main-content" class="page-content" tabindex="-1" aria-live="polite"></main>
+        <nav class="mobile-nav" id="mobile-nav" data-i18n-aria="app.mobileNav"></nav>
+      </div>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <noscript><p class="noscript-note" data-i18n="app.noScript">This prototype needs JavaScript to show the interface and sample data.</p></noscript>
+  </body>
+</html>
