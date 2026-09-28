@@ -106,6 +106,14 @@ components:
     height: "44px"
   bed-angle-range:
     height: "44px"
+  phone-preview:
+    viewportWidth: "390px"
+    aspectRatio: "0.4620853 (390 / 844)"
+    frameBezel: "8px"
+    frameRadius: "40px"
+    screenRadius: "32px"
+    notchWidth: "72px"
+    notchHeight: "16px"
 ---
 
 # Design System: Smart Mattress & Electric Bed Prototype
@@ -192,6 +200,11 @@ The shape system uses 8px small, 14px medium, and 16px large radii, with 999px p
 - At mobile widths, navigation moves to a fixed bottom bar. The electric-bed control item is removed in mattress-only mode.
 - The language selector switches between English and Simplified Chinese and remembers the selected language in this browser.
 - Links remain anchors with visible focus and `aria-current` on the active page.
+
+### Phone Preview
+- The Web / Phone switch keeps the selected app section while changing the preview. Phone mode shows the interactive mobile interface in a generic device frame at a 390px viewport, so its navigation and language selector remain usable.
+- Frame width, aspect ratio, bezel, corner radii, and notch dimensions come from `design-tokens.json`; the notch safe area keeps the mobile header readable.
+- The Web / Phone preview switch appears on wider screens. Phone mode centers the interactive mobile interface in the approved device frame and scales it to fit the available screen. At mobile widths the switch is hidden because the site itself uses its responsive mobile layout. The mock is illustrative and does not represent a specific phone brand.
 
 ### Buttons, Chips, and Inputs
 - Primary actions use a navy pill with aqua text. Secondary/preset controls use a white pill with a quiet border; pressed states are explicit.

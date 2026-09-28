@@ -799,6 +799,34 @@
     "rangeThumbBorder": {
       "$type": "dimension",
       "$value": "4px"
+    },
+    "phonePreviewWidth": {
+      "$type": "dimension",
+      "$value": "390px"
+    },
+    "phonePreviewAspectRatio": {
+      "$type": "number",
+      "$value": 0.46208530805687204
+    },
+    "phoneFrameBezel": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "phoneFrameRadius": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "phoneScreenRadius": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "phoneNotchWidth": {
+      "$type": "dimension",
+      "$value": "72px"
+    },
+    "phoneNotchHeight": {
+      "$type": "dimension",
+      "$value": "16px"
     }
   }
 }

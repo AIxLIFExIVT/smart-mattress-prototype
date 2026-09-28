@@ -56,6 +56,14 @@
             <strong data-i18n="app.brand">Sleep system</strong>
           </div>
           <div class="topbar-context"><span class="status-dot" aria-hidden="true"></span><span data-i18n="app.mainBedroom">Main bedroom</span><span class="topbar-divider" aria-hidden="true"></span><span class="topbar-sample" data-i18n="app.sampleData">Sample data</span></div>
+          <div class="view-mode-switch" role="group" aria-label="Preview mode" data-i18n-aria="preview.group">
+            <button class="view-mode-button is-active" type="button" data-preview-mode="web" aria-pressed="true" data-i18n-aria="preview.web">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.75" y="3.5" width="18.5" height="13" rx="1.5"/><path d="M8 21h8m-4-4.5V21"/></svg><span data-i18n="preview.web">Web</span>
+            </button>
+            <button class="view-mode-button" type="button" data-preview-mode="phone" aria-pressed="false" data-i18n-aria="preview.phone">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.75" width="12" height="18.5" rx="2.5"/><path d="M10 5.5h4M11 18.5h2"/></svg><span data-i18n="preview.phone">Phone</span>
+            </button>
+          </div>
           <select id="language-select" class="language-select" aria-label="Language" data-i18n-aria="language.label">
             <option value="en">English</option>
             <option value="zh">中文</option>
@@ -67,6 +75,25 @@
       </div>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+    <main class="phone-preview-view" id="phone-preview-view" hidden aria-label="Phone preview" data-i18n-aria="preview.view">
+      <div class="phone-preview-toolbar">
+        <div class="view-mode-switch" role="group" aria-label="Preview mode" data-i18n-aria="preview.group">
+          <button class="view-mode-button is-active" type="button" data-preview-mode="web" aria-pressed="true" data-i18n-aria="preview.web">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.75" y="3.5" width="18.5" height="13" rx="1.5"/><path d="M8 21h8m-4-4.5V21"/></svg><span data-i18n="preview.web">Web</span>
+          </button>
+          <button class="view-mode-button" type="button" data-preview-mode="phone" aria-pressed="false" data-i18n-aria="preview.phone">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2.75" width="12" height="18.5" rx="2.5"/><path d="M10 5.5h4M11 18.5h2"/></svg><span data-i18n="preview.phone">Phone</span>
+          </button>
+        </div>
+      </div>
+      <div class="phone-preview-stage">
+        <div class="phone-device">
+          <div class="phone-notch" aria-hidden="true"><span class="phone-speaker"></span><span class="phone-camera"></span></div>
+          <iframe class="phone-screen" src="./?phonePreview=1#home" title="Smart Sleep Bed mobile interface preview" data-i18n-title="preview.frameTitle"></iframe>
+        </div>
+      </div>
+      <p class="phone-preview-note"><span class="phone-preview-note-dot" aria-hidden="true"></span><span data-i18n="preview.note">Interactive prototype · sample data only</span></p>
+    </main>
     <noscript><p class="noscript-note" data-i18n="app.noScript">This prototype needs JavaScript to show the interface and sample data.</p></noscript>
   </body>
 </html>

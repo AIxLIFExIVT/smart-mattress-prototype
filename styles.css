@@ -1,5 +1,6 @@
 :root { color-scheme: light; font-synthesis: none; }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { min-width: 0; scroll-behavior: smooth; }
 body { margin: 0; background: var(--color-semantic-canvas); color: var(--color-semantic-ink); font-family: var(--typography-family-ui); font-size: var(--typography-size-body); line-height: var(--typography-line-height-normal); }
 button, input, select { font: inherit; }
@@ -43,6 +44,11 @@ button { color: inherit; }
 .topbar-sample { color: var(--color-semantic-ink-quiet); font-size: var(--typography-size-caption); }
 .topbar-divider { width: var(--component-border-hairline); height: var(--space-primitive-4); margin: 0 var(--space-primitive-1); background: var(--color-semantic-line); }
 .language-select { min-height: var(--component-target-min); padding: 0 var(--space-primitive-3); border: var(--component-border-hairline) solid var(--color-semantic-line); border-radius: var(--radius-primitive-small); background: var(--color-semantic-surface); color: var(--color-semantic-ink); font-size: var(--typography-size-small); cursor: pointer; }
+.view-mode-switch { display: inline-flex; align-items: center; gap: var(--space-primitive-1); padding: var(--component-selector-inset); border: var(--component-border-hairline) solid var(--color-semantic-line); border-radius: var(--radius-primitive-pill); background: var(--color-semantic-surface); }
+.view-mode-button { display: inline-flex; min-height: var(--component-target-min); align-items: center; justify-content: center; gap: var(--space-primitive-2); padding: 0 var(--space-primitive-3); border: 0; border-radius: var(--radius-primitive-pill); background: transparent; color: var(--color-semantic-ink-muted); font-size: var(--typography-size-small); font-weight: var(--typography-weight-medium); cursor: pointer; transition: background var(--motion-duration-fast) var(--motion-easing-standard), color var(--motion-duration-fast) var(--motion-easing-standard); }
+.view-mode-button:hover { background: var(--color-semantic-surface-subtle); color: var(--color-semantic-ink); }
+.view-mode-button.is-active { background: var(--color-primitive-navy-950); color: var(--color-primitive-aqua-300); }
+.view-mode-button svg { width: var(--component-icon-small); height: var(--component-icon-small); fill: none; stroke: currentColor; stroke-width: var(--component-icon-stroke); stroke-linecap: round; stroke-linejoin: round; }
 .avatar-button { display: flex; min-width: var(--component-target-min); min-height: var(--component-target-min); align-items: center; justify-content: center; gap: var(--space-primitive-2); padding: 0 var(--space-primitive-2); border: var(--component-border-hairline) solid var(--color-semantic-line); border-radius: var(--radius-primitive-pill); background: var(--color-semantic-surface); cursor: pointer; }
 .avatar-button span { display: grid; width: var(--component-avatar-inner); height: var(--component-avatar-inner); place-items: center; border-radius: var(--radius-primitive-pill); background: var(--color-primitive-navy-950); color: var(--color-primitive-aqua-300); font-size: var(--typography-size-caption); font-weight: var(--typography-weight-semibold); }
 .avatar-button svg { width: var(--component-icon-small); height: var(--component-icon-small); color: var(--color-semantic-ink-quiet); }
@@ -219,9 +225,24 @@ button { color: inherit; }
 .skip-link:focus { transform: translateY(0); }
 .toast { position: fixed; right: var(--space-primitive-6); bottom: var(--space-primitive-6); z-index: 15; max-width: min(var(--component-toast-max-width), calc(100vw - var(--space-primitive-8))); padding: var(--space-primitive-3) var(--space-primitive-5); border-radius: var(--radius-primitive-medium); background: var(--color-semantic-ink); color: var(--color-primitive-neutral-0); box-shadow: var(--shadow-soft); opacity: 0; pointer-events: none; transform: translateY(var(--space-primitive-2)); transition: opacity var(--motion-duration-normal) var(--motion-easing-standard), transform var(--motion-duration-normal) var(--motion-easing-standard); }
 .toast.is-visible { opacity: 1; transform: translateY(0); }
+.phone-preview-view { display: grid; width: 100%; height: 100vh; height: 100dvh; min-height: 100vh; min-height: 100dvh; grid-template-rows: auto minmax(0, 1fr) auto; gap: var(--space-primitive-3); padding: var(--space-primitive-4) var(--space-primitive-6); background: var(--color-semantic-canvas); }
+.phone-preview-toolbar { display: flex; justify-content: flex-end; }
+.phone-preview-stage { display: grid; min-width: 0; min-height: 0; place-items: center; overflow: hidden; }
+.phone-device { position: relative; width: min(100%, calc(var(--component-phone-preview-width) + var(--component-phone-frame-bezel) + var(--component-phone-frame-bezel) + var(--component-border-hairline) + var(--component-border-hairline))); padding: var(--component-phone-frame-bezel); overflow: hidden; border: var(--component-border-hairline) solid var(--color-primitive-navy-800); border-radius: var(--component-phone-frame-radius); background: var(--color-primitive-navy-950); box-shadow: var(--shadow-soft); transform: scale(var(--phone-preview-fit-scale, 1)); transform-origin: center center; }
+.phone-notch { position: absolute; top: var(--component-phone-frame-bezel); left: 50%; z-index: 1; display: flex; width: var(--component-phone-notch-width); height: var(--component-phone-notch-height); align-items: center; justify-content: center; gap: var(--space-primitive-1); border-radius: var(--radius-primitive-pill); background: var(--color-primitive-navy-950); transform: translateX(-50%); }
+.phone-speaker { width: calc(var(--component-phone-notch-width) / 3); height: var(--component-border-emphasis); border-radius: var(--radius-primitive-pill); background: var(--color-primitive-navy-800); }
+.phone-camera { width: var(--component-status-dot); height: var(--component-status-dot); border: var(--component-border-hairline) solid var(--color-primitive-blue-500); border-radius: var(--radius-primitive-pill); background: var(--color-primitive-navy-800); }
+.phone-screen { display: block; width: 100%; aspect-ratio: var(--component-phone-preview-aspect-ratio); border: 0; border-radius: var(--component-phone-screen-radius); background: var(--color-semantic-canvas); }
+.phone-preview-note { display: flex; align-items: center; justify-content: center; gap: var(--space-primitive-2); margin: 0; color: var(--color-semantic-ink-quiet); font-size: var(--typography-size-caption); }
+.phone-preview-note-dot { width: var(--component-status-dot); height: var(--component-status-dot); flex: 0 0 auto; border-radius: var(--radius-primitive-pill); background: var(--color-primitive-aqua-500); }
+.phone-preview-mode .view-mode-switch { display: none; }
+.phone-preview-mode .topbar { height: calc(var(--component-mobile-topbar-height) + var(--component-phone-notch-height)); padding-top: var(--component-phone-notch-height); }
+.phone-preview-active { overflow: hidden; }
+.phone-preview-active .app-shell, .phone-preview-active .toast { display: none; }
 .noscript-note { position: fixed; inset: auto var(--space-primitive-4) var(--space-primitive-4); z-index: 10; margin: 0; padding: var(--space-primitive-4); border-radius: var(--radius-primitive-small); background: var(--color-primitive-navy-950); color: var(--color-primitive-aqua-300); }
 
 @media (max-width: 1080px) {
+  .topbar-context { display: none; }
   .page-content { padding-inline: var(--space-primitive-6); }
   .home-lower { grid-template-columns: minmax(0, 1fr) minmax(var(--component-home-aside-min-width), .8fr); gap: var(--space-primitive-6); }
   .pressure-wrap { grid-template-columns: 1fr; }
@@ -236,6 +257,7 @@ button { color: inherit; }
   .mobile-brand { display: flex; }
   .mobile-brand strong { font-size: var(--typography-size-caption); white-space: nowrap; }
   .topbar-context { display: none; }
+  .view-mode-switch { display: none; }
   .avatar-button { min-width: var(--component-target-min); min-height: var(--component-target-min); padding: 0; }
   .avatar-button svg { display: none; }
   .page-content { padding: var(--space-primitive-6) var(--space-primitive-4) var(--component-mobile-bottom-clearance); }

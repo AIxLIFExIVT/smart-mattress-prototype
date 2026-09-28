@@ -7,6 +7,7 @@ A static, bilingual interface prototype for a smart mattress and electric bed. I
 - English and Simplified Chinese interface
 - Kanit with Noto Sans SC and system font fallbacks
 - Home, Bed Control, Sleep Report, and Profile screens
+- Web and phone preview modes with a responsive, interactive device frame
 - Design tokens and implementation guidance
 
 ## Important
@@ -15,7 +16,7 @@ All sleep, pressure, heart-rate, and AI suggestion values are illustrative sampl
 
 ## Preview
 
-Open `index.html` from a local static web server, or deploy this repository to a static hosting service. `netlify.toml` configures the repository root as the publish directory.
+Open `index.html` from a local static web server, or deploy this repository to a static hosting service. On wider screens, use the **Web / Phone** switch in the upper-right area to change between the dashboard and a scaled, interactive phone mockup. At mobile widths, the site automatically uses its responsive mobile layout. `netlify.toml` configures the repository root as the publish directory.
 
 ## Design rules
 

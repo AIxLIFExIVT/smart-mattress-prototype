@@ -26,6 +26,12 @@ const TEXT = {
     "app.sampleOnly": "Sample data only",
     "app.mobileNav": "Mobile navigation",
     "app.goProfile": "Go to account and settings",
+    "preview.group": "Preview mode",
+    "preview.web": "Web",
+    "preview.phone": "Phone",
+    "preview.view": "Phone preview",
+    "preview.frameTitle": "Smart Sleep Bed mobile interface preview",
+    "preview.note": "Interactive prototype · sample data only",
     "app.noScript": "This prototype needs JavaScript to show the interface and sample data.",
     "app.errorTitle": "The prototype could not load",
     "app.errorText": "Open this page through a local web server and make sure design-tokens.json is in the prototype folder.",
@@ -177,6 +183,12 @@ const TEXT = {
     "app.sampleOnly": "仅供演示的数据",
     "app.mobileNav": "移动端导航",
     "app.goProfile": "前往账户与设置",
+    "preview.group": "预览模式",
+    "preview.web": "网页",
+    "preview.phone": "手机",
+    "preview.view": "手机预览",
+    "preview.frameTitle": "智能睡眠床手机界面预览",
+    "preview.note": "可交互原型 · 仅演示数据",
     "app.noScript": "此原型需要启用 JavaScript 才能显示界面和示例数据。",
     "app.errorTitle": "原型无法加载",
     "app.errorText": "请通过本地 Web 服务器打开此页面，并确认 prototype 文件夹中包含 design-tokens.json。",
@@ -327,6 +339,12 @@ const SIGNAL_HEIGHTS = ["mid", "mid", "short", "short", "tall", "tall", "tall", 
 const ICON_INFO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>';
 const app = document.querySelector("#main-content");
 const toast = document.querySelector("#toast");
+const phonePreviewView = document.querySelector("#phone-preview-view");
+const phonePreviewStage = document.querySelector(".phone-preview-stage");
+const phonePreviewDevice = document.querySelector(".phone-device");
+const phonePreviewFrame = document.querySelector(".phone-screen");
+const previewModeButtons = [...document.querySelectorAll("[data-preview-mode]")];
+if (new URLSearchParams(location.search).has("phonePreview")) document.documentElement.classList.add("phone-preview-mode");
 let savedValues = [];
 try { savedValues = JSON.parse(localStorage.getItem("sleep-prototype-presets") || "[]"); } catch { savedValues = []; }
 const state = {
@@ -388,6 +406,7 @@ function localizeShell() {
   document.querySelector('meta[name="description"]').content = tr("app.description");
   document.querySelectorAll("[data-i18n]").forEach((node) => { node.textContent = tr(node.dataset.i18n); });
   document.querySelectorAll("[data-i18n-aria]").forEach((node) => { node.setAttribute("aria-label", tr(node.dataset.i18nAria)); });
+  document.querySelectorAll("[data-i18n-title]").forEach((node) => { node.setAttribute("title", tr(node.dataset.i18nTitle)); });
   document.querySelector("#language-select").value = state.language;
 }
 function navigate(page) {
@@ -577,10 +596,48 @@ function savePreset() {
 }
 function updatePeriod(period) { state.period = period; render(); }
 
+function fitPhonePreview() {
+  const availableWidth = phonePreviewStage.clientWidth;
+  const availableHeight = phonePreviewStage.clientHeight;
+  if (!availableWidth || !availableHeight || !phonePreviewDevice.offsetWidth || !phonePreviewDevice.offsetHeight) return;
+  const scale = Math.min(1, availableHeight / phonePreviewDevice.offsetHeight, availableWidth / phonePreviewDevice.offsetWidth);
+  phonePreviewDevice.style.setProperty("--phone-preview-fit-scale", String(scale));
+}
+function setPreviewMode(mode) {
+  const phone = mode === "phone" && !matchMedia("(max-width: 760px)").matches;
+  phonePreviewView.hidden = !phone;
+  document.body.classList.toggle("phone-preview-active", phone);
+  previewModeButtons.forEach((button) => {
+    const selected = (button.dataset.previewMode === "phone") === phone;
+    button.classList.toggle("is-active", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  if (phone) {
+    const previewUrl = new URL(location.href);
+    previewUrl.search = "?phonePreview=1";
+    previewUrl.hash = state.page;
+    if (phonePreviewFrame.src !== previewUrl.href) phonePreviewFrame.src = previewUrl.href;
+    requestAnimationFrame(fitPhonePreview);
+  }
+}
+
 document.querySelector("#language-select").addEventListener("change", (event) => {
   state.language = event.target.value === "zh" ? "zh" : "en";
   localStorage.setItem("sleep-prototype-language", state.language);
   render();
+  if (!phonePreviewView.hidden) requestAnimationFrame(fitPhonePreview);
+});
+previewModeButtons.forEach((button) => button.addEventListener("click", () => setPreviewMode(button.dataset.previewMode)));
+window.addEventListener("resize", () => {
+  if (matchMedia("(max-width: 760px)").matches && !phonePreviewView.hidden) setPreviewMode("web");
+  else if (!phonePreviewView.hidden) requestAnimationFrame(fitPhonePreview);
+});
+phonePreviewFrame.addEventListener("load", () => { if (!phonePreviewView.hidden) requestAnimationFrame(fitPhonePreview); });
+window.addEventListener("storage", (event) => {
+  if (event.key !== "sleep-prototype-language" || !event.newValue) return;
+  state.language = event.newValue === "zh" ? "zh" : "en";
+  render();
+  if (!phonePreviewView.hidden) requestAnimationFrame(fitPhonePreview);
 });
 document.addEventListener("click", (event) => {
   const segment = event.target.closest("[data-segment]");
