@@ -423,7 +423,8 @@ button { color: inherit; }
   .profile-form-actions > button { flex: 1; }
   .bed-anatomy-card, .bed-motion-card, .air-support-panel, .bed-heatmap-card, .bed-ai-card { padding: var(--space-primitive-4); }
   .bed-visual-control { min-height: var(--component-bed-visual-height-compact); }
-  .bed-outline-control { width: min(100%, var(--component-bed-diagram-portrait-width-compact)); }
+  .bed-outline-control { width: min(100%, var(--component-bed-diagram-portrait-width-compact)); height: var(--component-bed-diagram-portrait-height); grid-template-rows: minmax(0, .7fr) minmax(0, 2.5fr) minmax(0, .7fr); }
+  .bed-outline-control .air-cell.is-selected { outline-offset: 0; }
   .air-mode-row { align-items: flex-start; flex-direction: column; }
   .air-mode-switch { width: 100%; }
   .air-mode-switch .side-button { flex: 1; }

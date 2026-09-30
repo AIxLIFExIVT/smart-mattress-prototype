@@ -224,6 +224,7 @@ The shape system uses 8px small, 14px medium, and 16px large radii, with 999px p
 
 ### Bed Controls and Position Profiles
 - **Bed Control:** The page separates head and foot motor angles from the six air cells. Its model selector demonstrates independent or linked left/right motors. The bed diagram presents six central-body cells as three paired zones; selecting either member highlights the pair.
+- **iPhone Bed Control:** Stack the anatomy and adjustment panels. Keep all three paired air-cell rows inside the mattress outline, preserve the 44px touch target, and keep the selected-pair treatment clear of the head and foot motor zones.
 - **Air Support:** Upper, middle, and lower pairs each share one target. Automatic and manual controls use centrally configured demonstration data. Unit, bounds, and sensor scale are mock settings awaiting hardware confirmation; device feedback is illustrative and never sent to an API.
 - **Pressure Map:** The optional body pressure map is distinct from the six air-cell pressure readings. The mat-sensor selector switches between “included · simulated data” and a full-feature preview for a model without the sensor.
 - **AI Insight:** A sample flow demonstrates readings → recurring pattern → suggested support change → user review. The suggestion does not change a target automatically; the user enters the manual controls to review it.
