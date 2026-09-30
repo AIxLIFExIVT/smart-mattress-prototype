@@ -7,16 +7,18 @@ A static, bilingual interface prototype for a smart mattress and electric bed. I
 - English and Simplified Chinese interface
 - Kanit with Noto Sans SC and system font fallbacks
 - Home, Bed Control, Sleep Report, and Profile screens
-- Web and phone preview modes with a responsive, interactive device frame
+- Web, iPhone, and iPad preview modes with responsive interactive device frames
+- Independent or linked bed-motor models, six body cells arranged as three paired air zones, and a separate pressure-mat preview
+- Named position profiles with save/update actions; illustrative AI insight for user review
 - Design tokens and implementation guidance
 
 ## Important
 
-All sleep, pressure, heart-rate, and AI suggestion values are illustrative sample data. Controls update this browser prototype only. It does not connect to a bed, sensors, accounts, or health services.
+All sleep, pressure, heart-rate, air-cell, device-feedback, and AI suggestion values are illustrative sample data. Pressure units, ranges, and raw sensor scales live in an editable mock configuration and are not hardware specifications. Controls and saved profiles update this browser prototype only. It does not connect to a bed, sensors, APIs, accounts, or health services.
 
 ## Preview
 
-Open `index.html` from a local static web server, or deploy this repository to a static hosting service. On wider screens, use the **Web / Phone** switch in the upper-right area to change between the dashboard and a scaled, interactive phone mockup. At mobile widths, the site automatically uses its responsive mobile layout. `netlify.toml` configures the repository root as the publish directory.
+Open `index.html` from a local static web server. On wider screens, use the **Web / iPhone / iPad** switch in the upper-right area to change between the dashboard and scaled, interactive device previews. The iPad preview uses a landscape layout; at mobile widths the site uses its responsive iPhone layout. `netlify.toml` configures the repository root as the publish directory.
 
 ## Design rules
 

@@ -165,11 +165,11 @@ The palette uses deep blue-black for navigation and selected controls, aqua for 
 **Character:** Kanit gives the English interface a geometric, contemporary feel; Noto Sans SC keeps Simplified Chinese text legible and complete. The prototype uses medium-to-semibold headings and regular body text rather than importing the reference template’s Nunito display style.
 
 ### Hierarchy
-- **Display** (500, 40px, 1.2 line-height, `-0.035em`): The night-duration figure and other prominent measurements.
-- **Headline** (600, 28px, 1.2, `-0.025em`): Page titles on desktop; reduced to the subhead scale on narrow screens.
-- **Title** (600, 20px, 1.2, `-0.025em`): Section and card headings.
+- **Display** (500, 40px, 1.2 line-height, `-0.035em`): The night-duration figure and iPad page titles.
+- **Headline** (600, 28px, 1.2, `-0.025em`): Page titles on iPhone and section headings on iPad.
+- **Title** (600, 20px, 1.2, `-0.025em`): Section headings on iPhone and key control groups.
 - **Body** (400, 16px, 1.5): Default English and Simplified Chinese UI copy.
-- **Label** (500, 14px, 1.5): Navigation, controls, and compact UI labels. Captions use the existing 12px token.
+- **Control label** (500, 16px, 1.5): Bed adjustment labels, profile selectors, and primary actions. Secondary copy uses 14px; reserve the existing 12px caption for non-interactive metadata and chart ticks.
 
 **The Numeric Clarity Rule.** Keep measurement values on the existing tabular-numeral treatment; do not use decorative type for sensor-like readings.
 
@@ -183,7 +183,11 @@ Durations follow each language’s reading conventions: English uses compact `h`
 
 The desktop shell uses a fixed 252px navigation rail, a 68px sticky top bar, and a centered content region capped at 1240px. Home pairs the 16-segment night timeline with pressure and suggestion panels; report and settings use the same alignment and surface language. Spacing follows the token scale from 2px micro-gaps through 64px section breathing room.
 
-At 1080px, secondary columns compress; at 760px, the left rail becomes a compact header with a four-item bottom navigation, and content panels stack. At 380px, horizontal padding and metric gaps tighten. The design supports a minimum 320px viewport. The 16-step signal can scroll horizontally on compact screens while its time and selected-segment detail stay inspectable.
+At 1080px, secondary columns compress; at 820px, the left rail becomes a compact header with a four-item bottom navigation, and content panels stack. iPad landscape uses a two-column Bed Control view; iPad portrait and iPhone use the stacked layout. At 380px, horizontal padding and metric gaps tighten. The design supports a minimum 320px viewport. The 16-step signal can scroll horizontally on compact screens while its time and selected-segment detail stay inspectable.
+
+## UX Reference Review
+
+The user-provided `Downloads\\bed` screenshots informed the clear white-card hierarchy, concise metric labels, period controls, restrained charts, and explicit sample or waiting states. The prototype applies those patterns only to bed position, air support, pressure-map availability, and sleep data. Fitness, hydration, challenges, social sharing, and general lifestyle tracking remain outside this app's scope.
 
 ## Elevation & Depth
 
@@ -201,10 +205,10 @@ The shape system uses 8px small, 14px medium, and 16px large radii, with 999px p
 - The language selector switches between English and Simplified Chinese and remembers the selected language in this browser.
 - Links remain anchors with visible focus and `aria-current` on the active page.
 
-### Phone Preview
-- The Web / Phone switch keeps the selected app section while changing the preview. Phone mode shows the interactive mobile interface in a generic device frame at a 390px viewport, so its navigation and language selector remain usable.
-- Frame width, aspect ratio, bezel, corner radii, and notch dimensions come from `design-tokens.json`; the notch safe area keeps the mobile header readable.
-- The Web / Phone preview switch appears on wider screens. Phone mode centers the interactive mobile interface in the approved device frame and scales it to fit the available screen. At mobile widths the switch is hidden because the site itself uses its responsive mobile layout. The mock is illustrative and does not represent a specific phone brand.
+### iPhone and iPad Previews
+- The Web / iPhone / iPad switch keeps the selected app section while changing the preview. iPhone mode shows the interactive mobile interface at the token-defined phone viewport; iPad mode shows a landscape tablet view at the token-defined tablet viewport.
+- Frame widths, aspect ratios, bezel, corner radii, and iPhone notch dimensions come from `design-tokens.json`. The iPhone frame uses a safe-area inset; the iPad preview is a large-screen presentation view.
+- The previews scale to fit the browser window while preserving their CSS viewport sizes. The app itself remains responsive at narrow widths. Both device frames are illustrative interface previews, not native iOS apps.
 
 ### Buttons, Chips, and Inputs
 - Primary actions use a navy pill with aqua text. Secondary/preset controls use a white pill with a quiet border; pressed states are explicit.
@@ -218,10 +222,27 @@ The shape system uses 8px small, 14px medium, and 16px large radii, with 999px p
 - **Report:** Daily, weekly, and monthly states display example duration, heart-rate chart, stage durations, movement and posture summaries, bed-angle examples, and the pressure map.
 - **Suggestion:** Home includes one cautious observation with a visible sample-data label. It is demonstration copy, not a model result or health recommendation.
 
-### Bed Controls and Profile
-- **Bed Control:** Left and right sides keep separate head and leg angle values. Preset buttons change the selected side; saving a preset writes to this browser’s local storage. No hardware command is sent.
+### Bed Controls and Position Profiles
+- **Bed Control:** The page separates head and foot motor angles from the six air cells. Its model selector demonstrates independent or linked left/right motors. The bed diagram presents six central-body cells as three paired zones; selecting either member highlights the pair.
+- **Air Support:** Upper, middle, and lower pairs each share one target. Automatic and manual controls use centrally configured demonstration data. Unit, bounds, and sensor scale are mock settings awaiting hardware confirmation; device feedback is illustrative and never sent to an API.
+- **Pressure Map:** The optional body pressure map is distinct from the six air-cell pressure readings. The mat-sensor selector switches between “included · simulated data” and a full-feature preview for a model without the sensor.
+- **AI Insight:** A sample flow demonstrates readings → recurring pattern → suggested support change → user review. The suggestion does not change a target automatically; the user enters the manual controls to review it.
+- **Position Profiles:** A dropdown selects named bed positions. Save offers update-selected or save-as-new actions. Each profile stores left/right motor angles, three shared air-zone targets, and the adjustment mode in this browser. Existing saved angle presets are migrated as named profiles. No hardware command is sent.
 - **Device Mode:** Profile switches between electric-bed and mattress-only presentation. Mattress-only mode hides the control navigation and returns to Home if Control was open.
 - **Profile Settings:** The account card and notification switch are illustrative settings. They do not authenticate a user or configure a production notification service.
+
+## Scope Confirmation and Next Product Inputs
+
+| Product area | Current prototype treatment | Confirm before hardware integration |
+| --- | --- | --- |
+| Bed motors | Switch between independent and linked left/right examples; adjust head and leg angles | Which product models support each motor behavior and their safe angle limits |
+| Body air cells | Six central-body cells shown as three paired zones with a shared target per pair | Final physical placement and confirmation that each pair shares one control target |
+| Air support | Automatic and manual demo modes; target, unit, valid range, and raw scale are editable mock configuration | Actual pressure unit, valid range, sensor scale, pump behavior, and calibration |
+| Pressure map | Separate optional-mat selector; show a full map preview even when the mat is absent | Mat supplier, sensor/API contract, sampling frequency, and supported models |
+| Sleep data | Sample heart rate, movement, and sleep-stage screens | Device data schema, timestamps, quality indicators, and which fields are available on each model |
+| AI insight | Example pattern → proposed change → user review; it only changes prototype settings | Validated input signals, thresholds, safety rules, and whether recommendations are appropriate for the product |
+
+The next phase should confirm the model capability matrix and data contracts before replacing sample values with device data. The prototype deliberately keeps these unknowns configurable and labels them as simulated.
 
 ### Responsive and Accessible Behavior
 - A skip link, semantic landmarks, labelled controls, keyboard focus styling, live status text, and reduced-motion handling are implemented.
@@ -235,7 +256,7 @@ The shape system uses 8px small, 14px medium, and 16px large radii, with 999px p
 - **Do** keep English and Simplified Chinese strings, document language, and accessible labels in sync when editing interface copy.
 - **Do** use the Kanit → Noto Sans SC → Microsoft YaHei → sans-serif font stack and the existing Chinese report-duration layout tokens.
 - **Do** mark sleep, sensor, pressure-map, posture, and suggestion content as synthetic sample data.
-- **Do** keep left/right bed targets explicit and show each selected angle in degrees.
+- **Do** keep left/right motor angles explicit where the selected model supports split motors; show the three paired air-zone targets as shared values.
 - **Do** pair stage and pressure colors with text, legends, or accessible descriptions.
 - **Do** retain keyboard focus visibility and the reduced-motion preference.
 

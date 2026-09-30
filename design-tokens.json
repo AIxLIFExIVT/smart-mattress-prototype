@@ -808,6 +808,14 @@
       "$type": "number",
       "$value": 0.46208530805687204
     },
+    "tabletPreviewWidth": {
+      "$type": "dimension",
+      "$value": "1024px"
+    },
+    "tabletPreviewAspectRatio": {
+      "$type": "number",
+      "$value": 1.3333333333333333
+    },
     "phoneFrameBezel": {
       "$type": "dimension",
       "$value": "8px"
